@@ -173,7 +173,7 @@ import Form from "vform";
             this.$Progress.start()
             this.form.post("api/user");
             $('#exampleModal').modal('hide');
-            toast({
+            Toast.fire({
                 type: 'success',
                 title: 'User created successfully'
             });

@@ -52,17 +52,17 @@ Vue.use(VueProgressBar, {
 });
 
 
-import swal from 'sweetalert2';
-window.swal =swal;
+import Swal from 'sweetalert2';
+window.Swal =Swal;
 
-const toast = swal.mixin({
+const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
     timer: 3000
 });
 
-window.toast =toast;
+window.Toast =Toast;
 
   
 

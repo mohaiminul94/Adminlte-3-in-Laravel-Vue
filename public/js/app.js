@@ -2052,7 +2052,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$Progress.start();
       this.form.post("api/user");
       $('#exampleModal').modal('hide');
-      toast({
+      Toast.fire({
         type: 'success',
         title: 'User created successfully'
       });
@@ -74221,14 +74221,14 @@ Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_3___default.a, {
   thickness: '2px'
 });
 
-window.swal = sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a;
-var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.mixin({
+window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a;
+var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
   timer: 3000
 });
-window.toast = toast;
+window.Toast = Toast;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
