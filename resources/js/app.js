@@ -41,6 +41,15 @@ Vue.filter('upText', function(text) {
 Vue.filter('dateFormat', function(created) {
     return moment(created).format('MMMM Do YYYY');
 });
+
+
+import VueProgressBar from 'vue-progressbar';
+
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    thickness:'2px'
+});
   
 
 
