@@ -14,7 +14,9 @@ window.form= Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
-import VueRouter from 'vue-router'
+import moment from 'moment';
+
+import VueRouter from 'vue-router';
 Vue.use(VueRouter)
 
 
@@ -24,13 +26,21 @@ const routes = [
     { path: '/profile', component: require('./components/Profile.vue').default }
   ]
 
+
 const router = new VueRouter({
     mode: "history",
     routes // short for `routes: routes`
 })
 
 
+Vue.filter('upText', function(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+});
 
+
+Vue.filter('dateFormat', function(created) {
+    return moment(created).format('MMMM Do YYYY');
+});
   
 
 
