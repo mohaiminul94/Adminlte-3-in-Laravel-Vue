@@ -65,7 +65,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form @click.prevent="createUser">
               <div class="form-group">
                 <input
                   v-model="form.name"
@@ -146,6 +146,11 @@
 import Form from "vform";
 
 export default {
+
+  mounted() {
+    console.log("Users Component mounted.");
+  },
+
   data() {
     return {
       form: new Form({
@@ -159,8 +164,11 @@ export default {
     };
   },
 
-  mounted() {
-    console.log("Users Component mounted.");
-  }
+  methods: {
+    createUser() {
+        this.form.post('api/user');
+    }
+  },
+
 };
 </script>
