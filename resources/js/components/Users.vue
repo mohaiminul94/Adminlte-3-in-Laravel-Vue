@@ -22,13 +22,16 @@
                   <th>Name</th>
                   <th>Email</th>
                   <th>Type</th>
+                  <th>Registered at</th>
                   <th>Modify</th>
                 </tr>
-                <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>11-7-2014</td>
-                  <td>Approved</td>
+
+                <tr v-for="user in users" :key="user.id">
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.type }}</td>
+                  <td>{{ user.created_at }}</td>
                   <td>
                     <a href="#" style="margin-right:5px;">
                       <i class="fa fa-edit"></i>
@@ -38,6 +41,7 @@
                     </a>
                   </td>
                 </tr>
+
               </tbody>
             </table>
           </div>
@@ -145,28 +149,37 @@
 <script>
 import Form from "vform";
 
-export default {
-  mounted() {
-    console.log("Users Component mounted.");
-  },
+    export default {
+    mounted() {
+        console.log("Users Component mounted.");
+    },
 
-  data() {
-    return {
-      form: new Form({
-        name: "",
-        email: "",
-        password: "",
-        type: "",
-        bio: "",
-        photo: ""
-      })
-    };
-  },
+    data() {
+        return {
+        users: {},    
+        form: new Form({
+            name: "",
+            email: "",
+            password: "",
+            type: "",
+            bio: "",
+            photo: ""
+        })
+        };
+    },
 
-  methods: {
-    createUser() {
-      this.form.post("api/user");
-    }
-  }
+    methods: {
+        createUser() {
+            this.form.post("api/user");
+        },
+        loadUsers() {
+            axios.get("api/user").then(({data}) => this.users = data.data);
+        }
+    },
+
+    created() {
+        this.loadUsers();
+    },
+
 };
 </script>
