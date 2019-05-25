@@ -7,7 +7,7 @@
             <h3 class="card-title">Users Table</h3>
 
             <div class="card-tools">
-              <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+              <button class="btn btn-success" @click="openModal">
                 Add New
                 <i class="fas fa-user-plus"></i>
               </button>
@@ -33,7 +33,7 @@
                   <td>{{ user.type | upText }}</td>
                   <td>{{ user.created_at | dateFormat }}</td>
                   <td>
-                    <a href="#" style="margin-right:5px;">
+                    <a href="#" style="margin-right:5px;" @click="editModal(user)">
                       <i class="fa fa-edit"></i>
                     </a>
                     <a href="#" @click="deleteUser(user.id)">
@@ -217,6 +217,17 @@ import Form from "vform";
                     })
                 }
             })
+        },
+
+        openModal() {
+            this.form.reset();
+            $('#exampleModal').modal('show');
+        },
+        
+        editModal(user) {
+            this.form.reset();
+            $('#exampleModal').modal('show');
+            this.form.fill(user);
         },
 
     },
