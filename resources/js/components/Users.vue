@@ -171,14 +171,21 @@ import Form from "vform";
     methods: {
         createUser() {
             this.$Progress.start()
-            this.form.post("api/user");
-            Fire.$emit('afterCreated');
-            $('#exampleModal').modal('hide');
-            Toast.fire({
-                type: 'success',
-                title: 'User created successfully'
-            });
-            this.$Progress.finish();
+            this.form.post("api/user")
+            .then(() => {
+                Fire.$emit('afterCreated');
+                $('#exampleModal').modal('hide');
+                Toast.fire({
+                    type: 'success',
+                    title: 'User created successfully'
+                });
+                this.$Progress.finish();
+            })
+
+            .catch(() => {
+
+            })
+    
         },
 
         loadUsers() {
