@@ -161,6 +161,7 @@ import Form from "vform";
         editMode: false,            
         users: {},    
         form: new Form({
+            id:"",
             name: "",
             email: "",
             password: "",
@@ -236,7 +237,21 @@ import Form from "vform";
         },
 
         updateUser() {
-            console.log('editing');
+            this.$Progress.start();
+            this.form.put('api/user/'+this.form.id)
+            .then(() => {
+                Fire.$emit('afterCreated');
+                $('#exampleModal').modal('hide');
+                Swal.fire(
+                'Updated!',
+                'Your information has been updated.',
+                'success'
+                )
+                this.$Progress.finish();
+            })
+            .catch(() => {
+                this.$$Progress.fail();
+            })
         },
 
     },

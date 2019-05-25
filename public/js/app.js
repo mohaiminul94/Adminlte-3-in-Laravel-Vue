@@ -2041,6 +2041,7 @@ __webpack_require__.r(__webpack_exports__);
       editMode: false,
       users: {},
       form: new vform__WEBPACK_IMPORTED_MODULE_0___default.a({
+        id: "",
         name: "",
         email: "",
         password: "",
@@ -2110,15 +2111,26 @@ __webpack_require__.r(__webpack_exports__);
       this.form.fill(user);
     },
     updateUser: function updateUser() {
-      console.log('editing');
+      var _this4 = this;
+
+      this.$Progress.start();
+      this.form.put('api/user/' + this.form.id).then(function () {
+        Fire.$emit('afterCreated');
+        $('#exampleModal').modal('hide');
+        Swal.fire('Updated!', 'Your information has been updated.', 'success');
+
+        _this4.$Progress.finish();
+      })["catch"](function () {
+        _this4.$$Progress.fail();
+      });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.loadUsers();
     Fire.$on('afterCreated', function () {
-      _this4.loadUsers();
+      _this5.loadUsers();
     });
   }
 });
