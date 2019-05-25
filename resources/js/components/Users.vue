@@ -172,6 +172,7 @@ import Form from "vform";
         createUser() {
             this.$Progress.start()
             this.form.post("api/user");
+            Fire.$emit('afterCreated');
             $('#exampleModal').modal('hide');
             Toast.fire({
                 type: 'success',
@@ -188,6 +189,9 @@ import Form from "vform";
 
     created() {
         this.loadUsers();
+        Fire.$on('afterCreated', () => {
+            this.loadUsers();
+        });
     },
 
 };

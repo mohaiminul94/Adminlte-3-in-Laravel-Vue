@@ -2051,6 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
     createUser: function createUser() {
       this.$Progress.start();
       this.form.post("api/user");
+      Fire.$emit('afterCreated');
       $('#exampleModal').modal('hide');
       Toast.fire({
         type: 'success',
@@ -2068,7 +2069,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    var _this2 = this;
+
     this.loadUsers();
+    Fire.$on('afterCreated', function () {
+      _this2.loadUsers();
+    });
   }
 });
 
@@ -74229,6 +74235,7 @@ var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.mixin({
   timer: 3000
 });
 window.Toast = Toast;
+window.Fire = new Vue();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
