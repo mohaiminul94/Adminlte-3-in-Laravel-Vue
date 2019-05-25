@@ -36,7 +36,7 @@
                     <a href="#" style="margin-right:5px;">
                       <i class="fa fa-edit"></i>
                     </a>
-                    <a href="#">
+                    <a href="#" @click="deleteUser(user.id)">
                       <i class="fa fa-trash red"></i>
                     </a>
                   </td>
@@ -190,7 +190,34 @@ import Form from "vform";
 
         loadUsers() {
             axios.get("api/user").then(({data}) => this.users = data.data);
-        }
+        },
+
+        deleteUser(id) {
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if(result.value) {
+                        this.form.delete('api/user/'+id).then(() => {
+                            if (result.value) {
+                            Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                            )
+                            Fire.$emit('afterCreated');
+                        }
+                    }).catch(() => {
+                        Swal.fire("Faild!","There was something wrong","warning");
+                    })
+                }
+            })
+        },
 
     },
 
