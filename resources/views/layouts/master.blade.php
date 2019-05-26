@@ -202,6 +202,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/developer" class="nav-link">
+                <i class="nav-icon fa fa-cogs"></i>
+                <p>
+                  Developer
+                </p>
+              </router-link>
+            </li>
 
             <!-- <li class="nav-item">
               <a href="#" class="nav-link">
