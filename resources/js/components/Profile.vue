@@ -155,12 +155,13 @@ import Form from "vform";
     methods: {
 
         updateProfile() {
+            this.$Progress.start();
             this.form.put('api/profile')
             .then(() => {
-
+                this.$Progress.finish();
             })
             .catch(() => {
-                
+                this.$Progress.fail();
             })
         },
 
@@ -168,11 +169,20 @@ import Form from "vform";
             let file = e.target.files[0];
             // console.log(file);
             let reader = new FileReader();
-            reader.onloadend = (file) => {
-                // console.log('RESULT', reader.result)
-                this.form.photo= reader.result;
-                }
-            reader.readAsDataURL(file);
+            if (file['size'] < 2111775) {
+                reader.onloadend = (file) => {
+                    // console.log('RESULT', reader.result)
+                    this.form.photo= reader.result;
+                    }
+                reader.readAsDataURL(file);
+            }
+            else {
+                Swal.fire(
+                'Oops!',
+                'Your uploading more then 2mb file.',
+                'error'
+                )
+            }
         }
     },
 
