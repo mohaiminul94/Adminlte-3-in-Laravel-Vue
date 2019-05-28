@@ -2027,22 +2027,26 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     uploadPropic: function uploadPropic(e) {
-      var file = e.target.files[0];
+      var _this = this;
+
+      var file = e.target.files[0]; // console.log(file);
+
       var reader = new FileReader();
 
-      reader.onloadend = function () {
-        console.log('RESULT', reader.result);
+      reader.onloadend = function (file) {
+        // console.log('RESULT', reader.result)
+        _this.form.photo = reader.result;
       };
 
       reader.readAsDataURL(file);
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get("api/profile").then(function (_ref) {
       var data = _ref.data;
-      return _this.form.fill(data);
+      return _this2.form.fill(data);
     });
   }
 });
