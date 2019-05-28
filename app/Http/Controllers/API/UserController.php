@@ -93,6 +93,11 @@ class UserController extends Controller
         return ['message' => 'Updated the user info'];
     }
 
+    public function updateProfile(Request $request) {
+        $user= auth('api')->user();
+        return $request->photo;
+    }
+
     /**
      * Remove the specified resource from storage.
      *
