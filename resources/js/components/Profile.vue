@@ -88,7 +88,7 @@
                     <div class="form-group">
                         <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
                         <div class="col-sm-12">
-                            <input type="file"  name="photo" class="form-input">
+                            <input type="file" @change="uploadPropic"  name="photo" class="form-input">
                         </div>
 
                     </div>
@@ -133,6 +133,7 @@
 import Form from "vform";
 
     export default {
+
         mounted() {
             console.log('Component mounted.')
         },
@@ -149,6 +150,12 @@ import Form from "vform";
                     photo: ""
                 })
             };
+    },
+
+    methods: {
+        uploadPropic(file) {
+            console.log('uploading');
+        }
     },
 
     created() {
