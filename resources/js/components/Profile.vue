@@ -64,8 +64,8 @@
                         <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                         <div class="col-sm-12">
-                        <input type="text" v-model="form.name"  class="form-control" id="inputName" placeholder="Name" >
-                            <has-error  field="name"></has-error>
+                        <input type="text" v-model="form.name" class="form-control" id="inputName" placeholder="Name" >
+                            <has-error :form="form"  field="name"></has-error>
                         </div>
                     </div>
                     <div class="form-group">
@@ -73,7 +73,7 @@
 
                         <div class="col-sm-12">
                         <input type="email" v-model="form.email" class="form-control" id="inputEmail" placeholder="Email"  >
-                            <has-error  field="email"></has-error>
+                            <has-error :form="form" field="email"></has-error>
                         </div>
                     </div>
 
@@ -82,7 +82,7 @@
 
                         <div class="col-sm-12">
                         <textarea   class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                            <has-error  field="bio"></has-error>
+                            <has-error :form="form" field="bio"></has-error>
                         </div>
                     </div>
                     <div class="form-group">
@@ -103,7 +103,7 @@
                             placeholder="Passport"
                             
                         >
-                            <has-error  field="password"></has-error>
+                            <has-error :form="form" field="password"></has-error>
                         </div>
                     </div>
 
@@ -135,7 +135,7 @@ import Form from "vform";
     export default {
 
         mounted() {
-            console.log('Component mounted.')
+            console.log('Profile Component mounted.')
         },
 
         data() {
@@ -149,12 +149,17 @@ import Form from "vform";
                     bio: "",
                     photo: ""
                 })
-            };
+        };
     },
 
     methods: {
-        uploadPropic(file) {
-            console.log('uploading');
+        uploadPropic(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            reader.onloadend = function() {
+                console.log('RESULT', reader.result)
+                }
+            reader.readAsDataURL(file);
         }
     },
 

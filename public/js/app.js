@@ -2010,7 +2010,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log('Profile Component mounted.');
   },
   data: function data() {
     return {
@@ -2026,8 +2026,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    uploadPropic: function uploadPropic(file) {
-      console.log('uploading');
+    uploadPropic: function uploadPropic(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+
+      reader.onloadend = function () {
+        console.log('RESULT', reader.result);
+      };
+
+      reader.readAsDataURL(file);
     }
   },
   created: function created() {
@@ -60722,7 +60729,9 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _c("has-error", { attrs: { field: "name" } })
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "name" }
+                          })
                         ],
                         1
                       )
@@ -60768,7 +60777,9 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _c("has-error", { attrs: { field: "email" } })
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "email" }
+                          })
                         ],
                         1
                       )
@@ -60796,7 +60807,9 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _c("has-error", { attrs: { field: "bio" } })
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "bio" }
+                          })
                         ],
                         1
                       )
@@ -60844,7 +60857,9 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _c("has-error", { attrs: { field: "password" } })
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "password" }
+                          })
                         ],
                         1
                       )
