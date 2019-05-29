@@ -11,7 +11,7 @@
                 <h5 class="widget-user-desc">Web Designer</h5>
               </div>
               <div class="widget-user-image">
-                <img class="img-circle" src="/images/propic.jpg" alt="User Avatar">
+                <img class="img-circle" :src="loadProfilePic()" alt="User Avatar">
               </div>
               <div class="card-footer">
                 <div class="row">
@@ -141,6 +141,7 @@ import Form from "vform";
 
         data() {
             return {
+                users: {},
                 form: new Form({
                     id:"",
                     name: "",
@@ -149,16 +150,25 @@ import Form from "vform";
                     type: "",
                     bio: "",
                     photo: ""
-                })
+                }),
+                
         };
     },
 
+    
+
     methods: {
+
+        loadProfilePic() {
+            // axios.get("api/user").then(({data}) => this.users = data.data);
+            return "/images/profile/"+ this.form.photo;
+        },
 
         updateProfile() {
             this.$Progress.start();
             this.form.put('api/profile')
             .then(() => {
+                Fire.$emit('getProfilePic');
                 this.$Progress.finish();
             })
             .catch(() => {
@@ -175,6 +185,7 @@ import Form from "vform";
                     // console.log('RESULT', reader.result)
                     this.form.photo= reader.result;
                     }
+                // Fire.$emit('getProfilePic');    
                 reader.readAsDataURL(file);
             }
             else {
@@ -189,6 +200,12 @@ import Form from "vform";
 
     created() {
         axios.get("api/profile").then(({data}) => this.form.fill((data)));
+
+        this.loadProfilePic();
+        Fire.$on('getProfilePic', () => {
+            this.loadProfilePic();
+        });
+
     }
 
     }

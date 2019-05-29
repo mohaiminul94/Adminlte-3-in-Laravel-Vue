@@ -2015,6 +2015,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      users: {},
       form: new vform__WEBPACK_IMPORTED_MODULE_0___default.a({
         id: "",
         name: "",
@@ -2027,11 +2028,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    loadProfilePic: function loadProfilePic() {
+      // axios.get("api/user").then(({data}) => this.users = data.data);
+      return "/images/profile/" + this.form.photo;
+    },
     updateProfile: function updateProfile() {
       var _this = this;
 
       this.$Progress.start();
       this.form.put('api/profile').then(function () {
+        Fire.$emit('getProfilePic');
+
         _this.$Progress.finish();
       })["catch"](function () {
         _this.$Progress.fail();
@@ -2048,7 +2055,8 @@ __webpack_require__.r(__webpack_exports__);
         reader.onloadend = function (file) {
           // console.log('RESULT', reader.result)
           _this2.form.photo = reader.result;
-        };
+        }; // Fire.$emit('getProfilePic');    
+
 
         reader.readAsDataURL(file);
       } else {
@@ -2062,6 +2070,10 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("api/profile").then(function (_ref) {
       var data = _ref.data;
       return _this3.form.fill(data);
+    });
+    this.loadProfilePic();
+    Fire.$on('getProfilePic', function () {
+      _this3.loadProfilePic();
     });
   }
 });
@@ -2319,7 +2331,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this4.$Progress.finish();
       })["catch"](function () {
-        _this4.$$Progress.fail();
+        _this4.$Progress.fail();
       });
     }
   },
@@ -60685,16 +60697,27 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card card-widget widget-user" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "widget-user-image" }, [
+            _c("img", {
+              staticClass: "img-circle",
+              attrs: { src: _vm.loadProfilePic(), alt: "User Avatar" }
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ]),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(2),
         _vm._v(" "),
         _c("div", { staticStyle: { margin: "20px 100px" } }, [
           _c(
             "div",
             { staticClass: "tab-content", attrs: { id: "myTabContent" } },
             [
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "div",
@@ -60962,62 +60985,51 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card card-widget widget-user" }, [
-      _c(
-        "div",
-        {
-          staticClass: "widget-user-header text-white",
-          staticStyle: { background: "url('./images/cover.png') center center" }
-        },
-        [
-          _c("h3", { staticClass: "widget-user-username" }, [
-            _vm._v("Elizabeth Pierce")
-          ]),
-          _vm._v(" "),
-          _c("h5", { staticClass: "widget-user-desc" }, [
-            _vm._v("Web Designer")
+    return _c(
+      "div",
+      {
+        staticClass: "widget-user-header text-white",
+        staticStyle: { background: "url('./images/cover.png') center center" }
+      },
+      [
+        _c("h3", { staticClass: "widget-user-username" }, [
+          _vm._v("Elizabeth Pierce")
+        ]),
+        _vm._v(" "),
+        _c("h5", { staticClass: "widget-user-desc" }, [_vm._v("Web Designer")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-4 border-right" }, [
+          _c("div", { staticClass: "description-block" }, [
+            _c("h5", { staticClass: "description-header" }, [_vm._v("3,200")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "description-text" }, [_vm._v("SALES")])
           ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "widget-user-image" }, [
-        _c("img", {
-          staticClass: "img-circle",
-          attrs: { src: "/images/propic.jpg", alt: "User Avatar" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-footer" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-4 border-right" }, [
-            _c("div", { staticClass: "description-block" }, [
-              _c("h5", { staticClass: "description-header" }, [
-                _vm._v("3,200")
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "description-text" }, [_vm._v("SALES")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4 border-right" }, [
+          _c("div", { staticClass: "description-block" }, [
+            _c("h5", { staticClass: "description-header" }, [_vm._v("13,000")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "description-text" }, [
+              _vm._v("FOLLOWERS")
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 border-right" }, [
-            _c("div", { staticClass: "description-block" }, [
-              _c("h5", { staticClass: "description-header" }, [
-                _vm._v("13,000")
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "description-text" }, [
-                _vm._v("FOLLOWERS")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("div", { staticClass: "description-block" }, [
-              _c("h5", { staticClass: "description-header" }, [_vm._v("35")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "description-text" }, [
-                _vm._v("PRODUCTS")
-              ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c("div", { staticClass: "description-block" }, [
+            _c("h5", { staticClass: "description-header" }, [_vm._v("35")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "description-text" }, [
+              _vm._v("PRODUCTS")
             ])
           ])
         ])

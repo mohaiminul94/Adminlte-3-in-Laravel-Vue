@@ -250,7 +250,7 @@ import Form from "vform";
                 this.$Progress.finish();
             })
             .catch(() => {
-                this.$$Progress.fail();
+                this.$Progress.fail();
             })
         },
 
