@@ -160,8 +160,8 @@ import Form from "vform";
     methods: {
 
         loadProfilePic() {
-            // axios.get("api/user").then(({data}) => this.users = data.data);
-            return "/images/profile/"+ this.form.photo;
+            let photo = (this.form.photo.length > 200) ? this.form.photo : "images/profile/"+ this.form.photo;
+            return photo;
         },
 
         updateProfile() {
