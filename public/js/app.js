@@ -60732,6 +60732,9 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("name")
+                            },
                             attrs: {
                               type: "text",
                               id: "inputName",
@@ -60780,6 +60783,9 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("email")
+                            },
                             attrs: {
                               type: "email",
                               id: "inputEmail",
@@ -60819,10 +60825,28 @@ var render = function() {
                         { staticClass: "col-sm-12" },
                         [
                           _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.bio,
+                                expression: "form.bio"
+                              }
+                            ],
                             staticClass: "form-control",
+                            class: { "is-invalid": _vm.form.errors.has("bio") },
                             attrs: {
                               id: "inputExperience",
                               placeholder: "Experience"
+                            },
+                            domProps: { value: _vm.form.bio },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "bio", $event.target.value)
+                              }
                             }
                           }),
                           _vm._v(" "),
