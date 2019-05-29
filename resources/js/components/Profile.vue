@@ -101,6 +101,7 @@
                             class="form-control"
                             id="password"
                             placeholder="Passport"
+                            v-model="form.password"
                             
                         >
                             <has-error :form="form" field="password"></has-error>
