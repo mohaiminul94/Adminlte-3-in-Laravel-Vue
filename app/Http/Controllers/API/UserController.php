@@ -29,6 +29,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('isAdmin');
         return User::latest()->paginate(20);
     }
 
@@ -132,7 +133,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        $this->authorize('isAdmin');
         $user= User::findorFail($id);
         $user->delete();
         return ['message' => 'User deleted!'];
